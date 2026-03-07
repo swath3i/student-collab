@@ -7,7 +7,7 @@ class User(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=255, blank=True, default='')
-    profile_pic = models.URLField(blank=True, default='')
+    profile_pic = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
     last_active = models.DateTimeField(auto_now=True)
     last_notified_at = models.DateTimeField(null=True, blank=True)
 

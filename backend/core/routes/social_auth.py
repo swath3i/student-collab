@@ -38,10 +38,6 @@ def login(request, payload: LoginSchema):
 
         has_profile = Profile.objects.filter(user=user).exists()
 
-        # Update pic if changed
-        if not created and user.profile_pic != picture:
-            user.profile_pic = picture
-            user.save(update_fields=["profile_pic"])
 
         refresh = RefreshToken.for_user(user)
 

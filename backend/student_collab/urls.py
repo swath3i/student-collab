@@ -5,7 +5,8 @@ from core.routes.user_api import router as user_router
 from core.routes.profile_api import router as profile_router
 from django.contrib import admin
 from django.urls import path
-
+from django.conf.urls.static import static
+from django.conf import settings
 
 api = NinjaAPI(
     version="1.0",
@@ -43,10 +44,10 @@ api.add_router("v1/auth/", auth_router)
 router = Router()
 api.add_router("v1/", router, auth=[AuthBearer()])
 router.add_router("profile", profile_router, tags=["profile"])
-router.add_router("users", user_router, tags=["users"])
+router.add_router("user", user_router, tags=["user"])
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', api.urls),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

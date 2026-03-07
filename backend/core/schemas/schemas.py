@@ -7,3 +7,8 @@ class LoginSchema(Schema):
 class ProfileSchemaIn(Schema):
     skills_text: str
     intent_text: str
+
+
+class UserSchemaIn(Schema):
+    name:str
+    
