@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import './Onboarding.css';
@@ -9,7 +9,7 @@ export default function Onboarding() {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
 
   const [formData, setFormData] = useState({
-    name: user.name || '',
+    name: '',
     skills_text: '',
     intent_text: '',
   });
@@ -17,7 +17,29 @@ export default function Onboarding() {
   const [previewUrl, setPreviewUrl] = useState(null);
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [fetching, setFetching] = useState(true);
   const [error, setError] = useState('');
+
+  // Fetch latest user data on mount
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const { data } = await api.get('/v1/user/');
+        setFormData(prev => ({
+          ...prev,
+          name: data.name || '',
+        }));
+        if (data.profile_pic) {
+          setPreviewUrl(data.profile_pic);
+        }
+      } catch (err) {
+        console.error('Failed to fetch user:', err);
+      } finally {
+        setFetching(false);
+      }
+    };
+    fetchUser();
+  }, []);
 
   const handleChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -37,6 +59,7 @@ export default function Onboarding() {
   };
 
   const getInitials = (name) => {
+    if (!name) return '?';
     return name
       .split(' ')
       .map(n => n[0])
@@ -52,14 +75,31 @@ export default function Onboarding() {
     return true;
   };
 
-  const handleNext = () => {
-    if (canProceed()) {
-      setStep(prev => prev + 1);
-    }
-  };
+ const handleNext = async () => {
+    if (!canProceed()) return;
 
-  const handleBack = () => {
-    setStep(prev => prev - 1);
+    // Save step 1 data immediately
+    if (step === 1) {
+      try {
+        setLoading(true);
+        await api.put('/v1/user/', { name: formData.name });
+
+        if (profilePic) {
+          const picData = new FormData();
+          picData.append('profile_pic', profilePic);
+          await api.put('/v1/user/photo', picData, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+          });
+        }
+      } catch (err) {
+        setError('Failed to save. Please try again.');
+        return;
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    setStep(prev => prev + 1);
   };
 
   const handleSubmit = async () => {
@@ -67,21 +107,15 @@ export default function Onboarding() {
     setError('');
 
     try {
-      const payload = new FormData();
-      payload.append('name', formData.name);
-      payload.append('skills_text', formData.skills_text);
-      payload.append('intent_text', formData.intent_text);
-      if (profilePic) {
-        payload.append('profile_pic', profilePic);
-      }
-
-      await api.post('/v1/profile/', payload, {
-        headers: { 'Content-Type': 'multipart/form-data' },
+      // Only create profile here — user data already saved in step 1
+      await api.post('/v1/profile/', {
+        skills_text: formData.skills_text,
+        intent_text: formData.intent_text,
       });
 
-      // Update local user data
       const updatedUser = { ...user, name: formData.name };
       localStorage.setItem('user', JSON.stringify(updatedUser));
+      localStorage.setItem('has_profile', 'true');
 
       navigate('/dashboard');
     } catch (err) {
@@ -91,6 +125,20 @@ export default function Onboarding() {
       setLoading(false);
     }
   };
+  const handleBack = () => {
+    setStep(prev => prev - 1);
+  };
+
+
+  if (fetching) {
+    return (
+      <div className="onboarding">
+        <div className="onboarding__container">
+          <p style={{ textAlign: 'center', color: 'var(--text-muted)' }}>Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="onboarding">
@@ -123,7 +171,7 @@ export default function Onboarding() {
                   <img src={previewUrl} alt="Profile" className="onboarding__photo-img" />
                 ) : (
                   <span className="onboarding__photo-initials">
-                    {formData.name ? getInitials(formData.name) : '?'}
+                    {getInitials(formData.name)}
                   </span>
                 )}
                 <div className="onboarding__photo-overlay">

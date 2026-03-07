@@ -8,8 +8,13 @@ export default function Landing() {
 
   useEffect(() => {
     const token = localStorage.getItem('access_token');
+    const hasProfile = localStorage.getItem('has_profile');
     if (token) {
-      navigate('/dashboard');
+      if (hasProfile === 'true') {
+        navigate('/dashboard');
+      } else {
+        navigate('/onboarding');
+      }
     }
   }, [navigate]);
 
