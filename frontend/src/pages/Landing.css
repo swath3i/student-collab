@@ -1,0 +1,319 @@
+/* ─── Landing Layout ───────────────────────────────────── */
+.landing {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ─── Decorative Background ────────────────────────────── */
+.landing__bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.landing__bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+}
+
+.landing__bg-circle--1 {
+  width: 600px;
+  height: 600px;
+  background: var(--accent-soft);
+  top: -200px;
+  right: -100px;
+}
+
+.landing__bg-circle--2 {
+  width: 400px;
+  height: 400px;
+  background: #D6E4FF;
+  bottom: -100px;
+  left: -100px;
+}
+
+.landing__bg-circle--3 {
+  width: 300px;
+  height: 300px;
+  background: #E8F5EE;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ─── Nav ──────────────────────────────────────────────── */
+.landing__nav {
+  position: relative;
+  z-index: 10;
+  padding: 24px 48px;
+  display: flex;
+  align-items: center;
+  animation: fadeIn 0.6s ease;
+}
+
+.landing__logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.landing__logo-icon {
+  font-size: 1.8rem;
+  color: var(--accent);
+}
+
+/* ─── Hero ─────────────────────────────────────────────── */
+.landing__hero {
+  position: relative;
+  z-index: 10;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 48px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.landing__hero-content {
+  animation: fadeUp 0.8s ease;
+}
+
+.landing__badge {
+  display: inline-block;
+  padding: 6px 16px;
+  background: var(--accent-light);
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 100px;
+  margin-bottom: 24px;
+  letter-spacing: 0.02em;
+}
+
+.landing__title {
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+
+.landing__title-accent {
+  color: var(--accent);
+  font-style: italic;
+}
+
+.landing__subtitle {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 36px;
+  max-width: 480px;
+}
+
+.landing__cta {
+  margin-bottom: 16px;
+}
+
+.landing__footnote {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* ─── Hero Visual (Match Cards) ────────────────────────── */
+.landing__hero-visual {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: fadeUp 0.8s ease 0.2s both;
+}
+
+.landing__card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.landing__card:hover {
+  transform: translateX(8px);
+  box-shadow: var(--shadow-md);
+}
+
+.landing__card--1 { animation: fadeUp 0.6s ease 0.4s both; }
+.landing__card--2 { animation: fadeUp 0.6s ease 0.55s both; }
+.landing__card--3 { animation: fadeUp 0.6s ease 0.7s both; }
+
+.landing__card-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.landing__card-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.landing__card-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.landing__card-skill {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.landing__card-match {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--green);
+  background: var(--green-light);
+  padding: 4px 12px;
+  border-radius: 100px;
+  flex-shrink: 0;
+}
+
+/* ─── How It Works ─────────────────────────────────────── */
+.landing__steps {
+  position: relative;
+  z-index: 10;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px 100px;
+  animation: fadeUp 0.8s ease 0.4s both;
+}
+
+.landing__steps-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 48px;
+  color: var(--text);
+}
+
+.landing__steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.landing__step {
+  padding: 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: box-shadow 0.3s ease;
+}
+
+.landing__step:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.landing__step-number {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.landing__step h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.landing__step p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* ─── Responsive ───────────────────────────────────────── */
+@media (max-width: 968px) {
+  .landing__hero {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 40px 24px 60px;
+  }
+
+  .landing__title {
+    font-size: 2.4rem;
+  }
+
+  .landing__nav {
+    padding: 20px 24px;
+  }
+
+  .landing__steps {
+    padding: 0 24px 80px;
+  }
+
+  .landing__steps-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing__title {
+    font-size: 1.9rem;
+  }
+
+  .landing__subtitle {
+    font-size: 1rem;
+  }
+
+  .landing__hero {
+    padding: 24px 16px 40px;
+  }
+
+  .landing__nav {
+    padding: 16px;
+  }
+
+  .landing__steps {
+    padding: 0 16px 60px;
+  }
+
+  .landing__step {
+    padding: 24px;
+  }
+}
