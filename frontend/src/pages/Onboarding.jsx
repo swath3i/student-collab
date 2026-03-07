@@ -75,7 +75,7 @@ export default function Onboarding() {
         payload.append('profile_pic', profilePic);
       }
 
-      await api.post('/profile/onboarding', payload, {
+      await api.post('/v1/profile/', payload, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 

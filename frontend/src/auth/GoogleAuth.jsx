@@ -7,8 +7,7 @@ export default function GoogleAuth() {
 
   const handleSuccess = async (credentialResponse) => {
     try {
-      // Send Google's ID token to Django Ninja backend
-      const { data } = await api.post('/auth/login', {
+      const { data } = await api.post('/v1/auth/login', {
         idToken: credentialResponse.credential,
       });
 
