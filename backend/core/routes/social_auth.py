@@ -3,6 +3,7 @@ from ninja import Router
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.tokens import RefreshToken
 from core.schemas.schemas import LoginSchema
+from core.models import Profile
 
 logger = logging.getLogger(__name__)
 User = get_user_model()
@@ -32,21 +33,18 @@ def login(request, payload: LoginSchema):
             defaults={
                 "username": email,
                 "name": name,
-                "profile_pic": picture,
             },
         )
 
-        # Update pic if changed
-        if not created and user.profile_pic != picture:
-            user.profile_pic = picture
-            user.save(update_fields=["profile_pic"])
+        has_profile = Profile.objects.filter(user=user).exists()
+
 
         refresh = RefreshToken.for_user(user)
 
         return {
             "token": str(refresh.access_token),
             "refresh": str(refresh),
-            "is_new_user": created,
+            "has_profile": has_profile,
             "user": {
                 "id": str(user.id),
                 "email": user.email,

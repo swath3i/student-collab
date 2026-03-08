@@ -8,20 +8,21 @@ export default function GoogleAuth() {
   const handleSuccess = async (credentialResponse) => {
     try {
       // Send Google's ID token to Django Ninja backend
-      const { data } = await api.post('/auth/login', {
+      const { data } = await api.post('/v1/auth/login', {
         idToken: credentialResponse.credential,
       });
 
       // Backend returns JWT + user info
       localStorage.setItem('access_token', data.token);
       localStorage.setItem('refresh_token', data.refresh);
+      localStorage.setItem('has_profile', data.has_profile);
       localStorage.setItem('user', JSON.stringify(data.user));
 
-      // Route based on new vs returning user
-      if (data.is_new_user) {
-        navigate('/onboarding');
-      } else {
+      // Route based on profile status
+      if (data.has_profile) {
         navigate('/dashboard');
+      } else {
+        navigate('/onboarding');
       }
     } catch (error) {
       console.error('Auth failed:', error);
