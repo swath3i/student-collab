@@ -25,3 +25,21 @@ class Profile(models.Model):
     skill_embedding = ArrayField(models.FloatField(), size=384, null=True, blank=True)
     intent_embedding = ArrayField(models.FloatField(), size=384, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class Connection(models.Model):
+    class Status(models.TextChoices):
+        PENDING = 'pending'
+        ACCEPTED = 'accepted'
+        DECLINED = 'declined'
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    requester = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_connections')
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_connections')
+    status = models.CharField(max_length=20, choices=Status.choices, default=Status.PENDING)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('requester', 'receiver')
+
+    def __str__(self):
+        return f"{self.requester.name} → {self.receiver.name} ({self.status})"
