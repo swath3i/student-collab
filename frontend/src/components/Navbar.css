@@ -1,0 +1,124 @@
+/* ─── Navbar ───────────────────────────────────────────── */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+
+.navbar__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ─── Logo ─────────────────────────────────────────────── */
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.navbar__logo-icon {
+  font-size: 1.5rem;
+  color: var(--accent);
+}
+
+.navbar__logo-text {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--text);
+}
+
+/* ─── Links ────────────────────────────────────────────── */
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.navbar__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 20px;
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.navbar__link:hover {
+  color: var(--text);
+  background: var(--surface-hover);
+}
+
+.navbar__link--active {
+  color: var(--accent);
+}
+
+.navbar__link--active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+/* ─── Right Side ───────────────────────────────────────── */
+.navbar__right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.navbar__avatar:hover {
+  background: var(--accent-soft);
+}
+
+/* ─── Responsive ───────────────────────────────────────── */
+@media (max-width: 768px) {
+  .navbar__inner {
+    padding: 0 16px;
+  }
+
+  .navbar__logo-text {
+    display: none;
+  }
+
+  .navbar__link {
+    padding: 8px 14px;
+  }
+
+  .navbar__link span {
+    display: none;
+  }
+}

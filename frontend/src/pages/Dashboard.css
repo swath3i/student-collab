@@ -1,0 +1,255 @@
+/* ─── Dashboard Layout ─────────────────────────────────── */
+.dashboard {
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.dashboard__main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+/* ─── Header ───────────────────────────────────────────── */
+.dashboard__header {
+  margin-bottom: 32px;
+  animation: fadeUp 0.5s ease;
+}
+
+.dashboard__title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.dashboard__subtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+/* ─── Feed ─────────────────────────────────────────────── */
+.dashboard__feed {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ─── Card ─────────────────────────────────────────────── */
+.dashboard__card {
+  display: flex;
+  gap: 20px;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: box-shadow 0.2s ease;
+  animation: fadeUp 0.4s ease both;
+}
+
+.dashboard__card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* ─── Avatar ───────────────────────────────────────────── */
+.dashboard__card-left {
+  flex-shrink: 0;
+}
+
+.dashboard__card-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.dashboard__card-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dashboard__card-avatar span {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* ─── Body ─────────────────────────────────────────────── */
+.dashboard__card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.dashboard__card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.dashboard__card-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.dashboard__card-email {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.dashboard__card-score {
+  font-size: 0.88rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ─── Sections ─────────────────────────────────────────── */
+.dashboard__card-section {
+  margin-bottom: 12px;
+}
+
+.dashboard__card-section h4 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.dashboard__card-section p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ─── Footer / Buttons ─────────────────────────────────── */
+.dashboard__card-footer {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+}
+
+.dashboard__card-btn {
+  padding: 8px 20px;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.dashboard__card-btn--connect {
+  background: var(--accent);
+  color: white;
+}
+
+.dashboard__card-btn--connect:hover {
+  background: var(--accent-hover);
+}
+
+.dashboard__card-btn--connect:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.dashboard__card-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.dashboard__card-btn--accept {
+  background: var(--green);
+  color: white;
+}
+
+.dashboard__card-btn--accept:hover {
+  opacity: 0.9;
+}
+
+.dashboard__card-btn--decline {
+  background: none;
+  color: var(--text-muted);
+  border: 1.5px solid var(--border);
+}
+
+.dashboard__card-btn--decline:hover {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+/* ─── Status Labels ────────────────────────────────────── */
+.dashboard__card-status {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 100px;
+}
+
+.dashboard__card-status--pending {
+  background: #FFF8E6;
+  color: #D4940A;
+}
+
+.dashboard__card-status--connected {
+  background: var(--green-light);
+  color: var(--green);
+}
+
+/* ─── Loading Skeleton ─────────────────────────────────── */
+.dashboard__loading {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dashboard__loading-card {
+  height: 200px;
+  background: linear-gradient(90deg, var(--bg-deep) 25%, var(--surface) 50%, var(--bg-deep) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-lg);
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ─── Empty State ──────────────────────────────────────── */
+.dashboard__empty {
+  text-align: center;
+  padding: 80px 24px;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+/* ─── Responsive ───────────────────────────────────────── */
+@media (max-width: 480px) {
+  .dashboard__main {
+    padding: 20px 16px;
+  }
+
+  .dashboard__card {
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+  }
+
+  .dashboard__card-avatar {
+    width: 48px;
+    height: 48px;
+  }
+
+  .dashboard__title {
+    font-size: 1.5rem;
+  }
+}

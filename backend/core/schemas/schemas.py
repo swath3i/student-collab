@@ -12,3 +12,13 @@ class ProfileSchemaIn(Schema):
 class UserSchemaIn(Schema):
     name:str
     
+class ProfileCreateSchema(Schema):
+    skills_text: str
+    intent_text: str
+
+class ConnectionRequestSchema(Schema):
+    receiver_id: str
+
+
+class ConnectionResponseSchema(Schema):
+    accept: bool
