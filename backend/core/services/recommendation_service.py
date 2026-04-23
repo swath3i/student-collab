@@ -28,12 +28,10 @@ class RecommendationService:
         try:
             cache_key = f"recommendations:{user.id}"
 
-            # Check Redis cache
             cached = redis_client.get(cache_key)
             if cached:
                 return json.loads(cached)
 
-            # Get current user's profile
             try:
                 my_profile = Profile.objects.get(user=user)
             except Profile.DoesNotExist:
@@ -42,24 +40,33 @@ class RecommendationService:
             if not my_profile.skill_embedding or not my_profile.intent_embedding:
                 return []
 
-            # Get IDs of users already connected (any status)
-            connected_ids = set(
-                Connection.objects.filter(requester=user).values_list('receiver_id', flat=True)
+            # Only exclude accepted connections — pending/declined users stay visible
+            accepted_ids = set(
+                Connection.objects.filter(
+                    requester=user, status=Connection.Status.ACCEPTED
+                ).values_list('receiver_id', flat=True)
             ) | set(
-                Connection.objects.filter(receiver=user).values_list('requester_id', flat=True)
+                Connection.objects.filter(
+                    receiver=user, status=Connection.Status.ACCEPTED
+                ).values_list('requester_id', flat=True)
             )
 
-            # Get all other profiles with embeddings
             other_profiles = (
                 Profile.objects
                 .exclude(user=user)
-                .exclude(user_id__in=connected_ids)
+                .exclude(user_id__in=accepted_ids)
                 .exclude(skill_embedding__isnull=True)
                 .exclude(intent_embedding__isnull=True)
                 .select_related('user')
             )
 
-            # Compute scores
+            # Build pending/declined connection map for annotation
+            conn_map = {}
+            for conn in Connection.objects.filter(requester=user).exclude(status=Connection.Status.ACCEPTED):
+                conn_map[str(conn.receiver_id)] = {"connection_id": str(conn.id), "status": conn.status, "direction": "sent"}
+            for conn in Connection.objects.filter(receiver=user).exclude(status=Connection.Status.ACCEPTED):
+                conn_map[str(conn.requester_id)] = {"connection_id": str(conn.id), "status": conn.status, "direction": "received"}
+
             recommendations = []
             for profile in other_profiles:
                 skill_sim = RecommendationService.cosine_similarity(
@@ -78,12 +85,12 @@ class RecommendationService:
                     "skills_text": profile.skills_text,
                     "intent_text": profile.intent_text,
                     "match_score": round(score * 100, 1),
+                    "connection": conn_map.get(str(profile.user.id)),
                 })
 
             recommendations.sort(key=lambda x: x["match_score"], reverse=True)
             recommendations = recommendations[:limit]
 
-            # Cache in Redis
             redis_client.setex(cache_key, CACHE_TTL, json.dumps(recommendations))
 
             return recommendations

@@ -1,0 +1,14 @@
+psycopg2-binary==2.9.9
+pgvector==0.2.5
+pymilvus==2.3.4
+marshmallow>=3.13.0,<4.0
+faiss-cpu==1.7.4
+pandas==2.1.4
+pyarrow==14.0.2
+numpy==1.26.4
+requests==2.31.0
+redis==5.0.1
+matplotlib==3.8.2
+psutil==5.9.8
+tqdm==4.66.1
+scipy==1.11.4

@@ -22,3 +22,7 @@ class ConnectionRequestSchema(Schema):
 
 class ConnectionResponseSchema(Schema):
     accept: bool
+
+
+class MessageSchemaIn(Schema):
+    content: str

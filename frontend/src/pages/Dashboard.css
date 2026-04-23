@@ -10,6 +10,65 @@
   padding: 32px 24px;
 }
 
+/* ─── Search ───────────────────────────────────────────── */
+.dashboard__search-wrap {
+  margin-bottom: 28px;
+}
+
+.dashboard__search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.dashboard__search-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--text-muted);
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.dashboard__search-input {
+  width: 100%;
+  height: 46px;
+  padding: 0 40px 0 44px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-xl);
+  font-size: 0.9375rem;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.dashboard__search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+.dashboard__search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.dashboard__search-clear {
+  position: absolute;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: background 0.15s, color 0.15s;
+}
+
+.dashboard__search-clear:hover {
+  background: var(--bg-deep);
+  color: var(--text);
+}
+
 /* ─── Header ───────────────────────────────────────────── */
 .dashboard__header {
   margin-bottom: 32px;
@@ -45,6 +104,15 @@
   border-radius: var(--radius-lg);
   transition: box-shadow 0.2s ease;
   animation: fadeUp 0.4s ease both;
+}
+
+.dashboard__card--clickable {
+  cursor: pointer;
+}
+
+.dashboard__card--clickable:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border-color: var(--accent);
 }
 
 .dashboard__card:hover {
@@ -173,6 +241,19 @@
 
 .dashboard__card-btn--accept:hover {
   opacity: 0.9;
+}
+
+.dashboard__card-btn--message {
+  background: var(--bg-deep);
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dashboard__card-btn--message:hover {
+  background: var(--accent-soft);
 }
 
 .dashboard__card-btn--decline {

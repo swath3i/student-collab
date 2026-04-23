@@ -8,6 +8,21 @@ logger = logging.getLogger(__name__)
 
 class ProfileService:
     @staticmethod
+    def get_profile(user):
+        try:
+            profile = Profile.objects.get(user=user)
+            return {
+                "skills_text": profile.skills_text,
+                "intent_text": profile.intent_text,
+                "updated_at": profile.updated_at.isoformat(),
+            }
+        except Profile.DoesNotExist:
+            return None
+        except Exception as e:
+            logger.error(f"Error fetching profile: {e}")
+            raise Exception(f"Failed to fetch profile: {str(e)}")
+
+    @staticmethod
     def create_profile(user, skills_text, intent_text):
         try:
             skill_embedding = MLService.get_embedding(skills_text)

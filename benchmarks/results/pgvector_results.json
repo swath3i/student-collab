@@ -1,0 +1,80 @@
+[
+  {
+    "backend": "pgvector",
+    "scale": 1000,
+    "index_type": "brute_force",
+    "indexing_time_seconds": 0.0,
+    "memory_usage_mb": 3.6875,
+    "query_latency_p50_ms": 503.8762495005358,
+    "query_latency_p95_ms": 574.0474672995333,
+    "query_latency_p99_ms": 643.1367696707821,
+    "throughput_qps": 1.966199448917896,
+    "recall_at_20": 1.0,
+    "num_queries": 100
+  },
+  {
+    "backend": "pgvector",
+    "scale": 1000,
+    "index_type": "sequential_scan",
+    "indexing_time_seconds": 0.0,
+    "memory_usage_mb": 3.6875,
+    "query_latency_p50_ms": 6.1502294993260875,
+    "query_latency_p95_ms": 13.598043450292593,
+    "query_latency_p99_ms": 29.530644831211593,
+    "throughput_qps": 124.29936503435506,
+    "recall_at_20": 1.0,
+    "num_queries": 100
+  },
+  {
+    "backend": "pgvector",
+    "scale": 1000,
+    "index_type": "hnsw",
+    "indexing_time_seconds": 0.5384325829982117,
+    "memory_usage_mb": 5.546875,
+    "query_latency_p50_ms": 80.96697949986265,
+    "query_latency_p95_ms": 94.74135834898334,
+    "query_latency_p99_ms": 113.66970907925882,
+    "throughput_qps": 12.272128738924813,
+    "recall_at_20": 0.9955,
+    "num_queries": 100
+  },
+  {
+    "backend": "pgvector",
+    "scale": 10000,
+    "index_type": "brute_force",
+    "indexing_time_seconds": 0.0,
+    "memory_usage_mb": 36.1953125,
+    "query_latency_p50_ms": 2355.0007920002827,
+    "query_latency_p95_ms": 4060.819070797697,
+    "query_latency_p99_ms": 4896.763406250691,
+    "throughput_qps": 0.3761171262213365,
+    "recall_at_20": 1.0,
+    "num_queries": 100
+  },
+  {
+    "backend": "pgvector",
+    "scale": 10000,
+    "index_type": "sequential_scan",
+    "indexing_time_seconds": 0.0,
+    "memory_usage_mb": 36.1953125,
+    "query_latency_p50_ms": 27.156353999089333,
+    "query_latency_p95_ms": 38.27622769913432,
+    "query_latency_p99_ms": 73.90550966960303,
+    "throughput_qps": 33.3337467938639,
+    "recall_at_20": 1.0,
+    "num_queries": 100
+  },
+  {
+    "backend": "pgvector",
+    "scale": 10000,
+    "index_type": "hnsw",
+    "indexing_time_seconds": 1.2472445830026118,
+    "memory_usage_mb": 48.7734375,
+    "query_latency_p50_ms": 46.1443540007167,
+    "query_latency_p95_ms": 58.438039250359,
+    "query_latency_p99_ms": 63.98530341979495,
+    "throughput_qps": 21.863518808992684,
+    "recall_at_20": 0.927,
+    "num_queries": 100
+  }
+]

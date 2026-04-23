@@ -7,6 +7,18 @@ logger = logging.getLogger(__name__)
 router = Router()
 
 
+@router.get("/", response={200: dict, 404: dict, 400: dict})
+def get_profile(request):
+    try:
+        data = ProfileService.get_profile(request.user)
+        if data is None:
+            return 404, {"detail": "Profile not found"}
+        return data
+    except Exception as e:
+        logger.error(f"Get profile error: {e}")
+        return 400, {"detail": str(e)}
+
+
 @router.post("/", response={200: dict, 400: dict})
 def create_profile(request, payload: ProfileSchemaIn):
     try:
