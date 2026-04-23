@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); backends=set\\(r['backend'] for r in d\\); print\\('Backends in combined:', backends\\); print\\('Total records:', len\\(d\\)\\)\")",
+      "Bash(python3 -c ' *)",
+      "Bash(grep -v \"^$\")",
+      "Bash(python3 -c \"import pymilvus; import psycopg2; print\\('deps ok'\\)\")",
+      "Bash(env/bin/python -c \"import pymilvus; print\\('pymilvus ok'\\)\")",
+      "Bash(env/bin/python bench_pgvector.py --scale all)",
+      "Bash(env/bin/python bench_milvus.py --scale all)",
+      "Bash(env/bin/python bench_caching.py --scale 10k)",
+      "Bash(env/bin/python -c ' *)",
+      "Bash(env/bin/python run_all.py --skip-data-gen --charts-only)"
+    ]
+  }
+}

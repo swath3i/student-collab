@@ -51,6 +51,8 @@ services:
     ports:
       - "5173:5173"
     env_file: .env
+    environment:
+      - BACKEND_HOST=backend
     volumes:
       - ./frontend:/app
       - /app/node_modules
@@ -69,6 +71,24 @@ services:
         limits:
           memory: 2G
 
+  milvus:
+    image: milvusdb/milvus:v2.3.4
+    command: ["milvus", "run", "standalone"]
+    environment:
+      ETCD_USE_EMBED: "true"
+      COMMON_STORAGETYPE: "local"
+    ports:
+      - "19530:19530"
+      - "9091:9091"
+    volumes:
+      - milvus-data:/var/lib/milvus
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9091/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
 volumes:
   pgdata:
   ml-models:
+  milvus-data:

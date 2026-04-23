@@ -1,0 +1,222 @@
+[
+  {
+    "method": "sequential",
+    "n_profiles": 100,
+    "batch_size": 1,
+    "total_time_s": 1.602897333999863,
+    "throughput_per_s": 62.38702746510935,
+    "mean_latency_ms": 15.832648699906713,
+    "p50_ms": 14.289687500422588,
+    "p99_ms": 50.41980417016024
+  },
+  {
+    "method": "batch",
+    "n_profiles": 100,
+    "batch_size": 16,
+    "total_time_s": 0.5321619580026891,
+    "throughput_per_s": 187.9127181043157,
+    "mean_latency_ms": 5.617720214234266,
+    "p50_ms": 5.189671874859414,
+    "p99_ms": 8.035021197333661
+  },
+  {
+    "method": "batch",
+    "n_profiles": 100,
+    "batch_size": 32,
+    "total_time_s": 0.49016862499775016,
+    "throughput_per_s": 204.01142566083047,
+    "mean_latency_ms": 5.517099937378589,
+    "p50_ms": 4.9010156250233194,
+    "p99_ms": 7.680247772955226
+  },
+  {
+    "method": "batch",
+    "n_profiles": 100,
+    "batch_size": 64,
+    "total_time_s": 0.5058393330000399,
+    "throughput_per_s": 197.69123015191093,
+    "mean_latency_ms": 5.000463324648763,
+    "p50_ms": 5.000463324648763,
+    "p99_ms": 5.174231063322736
+  },
+  {
+    "method": "sequential",
+    "n_profiles": 500,
+    "batch_size": 1,
+    "total_time_s": 7.659174666998297,
+    "throughput_per_s": 65.2811852110372,
+    "mean_latency_ms": 15.263232774072094,
+    "p50_ms": 14.429187500354601,
+    "p99_ms": 33.194105420152454
+  },
+  {
+    "method": "batch",
+    "n_profiles": 500,
+    "batch_size": 16,
+    "total_time_s": 2.9598477090003144,
+    "throughput_per_s": 168.92761018737497,
+    "mean_latency_ms": 5.960830974629516,
+    "p50_ms": 5.513381500122705,
+    "p99_ms": 8.533090027483468
+  },
+  {
+    "method": "batch",
+    "n_profiles": 500,
+    "batch_size": 32,
+    "total_time_s": 2.3651795420009876,
+    "throughput_per_s": 211.4004417512382,
+    "mean_latency_ms": 4.735929589857335,
+    "p50_ms": 4.627032546920873,
+    "p99_ms": 5.470449374977306
+  },
+  {
+    "method": "batch",
+    "n_profiles": 500,
+    "batch_size": 64,
+    "total_time_s": 3.1120745000007446,
+    "throughput_per_s": 160.66453421982038,
+    "mean_latency_ms": 6.22302841436478,
+    "p50_ms": 6.260674796891408,
+    "p99_ms": 7.133861482298585
+  },
+  {
+    "method": "batch",
+    "n_profiles": 500,
+    "batch_size": 128,
+    "total_time_s": 3.411106084000494,
+    "throughput_per_s": 146.58002058194788,
+    "mean_latency_ms": 6.832734823407412,
+    "p50_ms": 6.8772561835857005,
+    "p99_ms": 7.3821451888012595
+  },
+  {
+    "method": "batch",
+    "n_profiles": 500,
+    "batch_size": 256,
+    "total_time_s": 4.649035374997766,
+    "throughput_per_s": 107.54919239568925,
+    "mean_latency_ms": 9.33933397634316,
+    "p50_ms": 9.33933397634316,
+    "p99_ms": 11.187449676821666
+  },
+  {
+    "method": "sequential",
+    "n_profiles": 1000,
+    "batch_size": 1,
+    "total_time_s": 19.560813040996436,
+    "throughput_per_s": 51.12261938724913,
+    "mean_latency_ms": 19.494703712000046,
+    "p50_ms": 16.84860400018806,
+    "p99_ms": 66.14456774794235
+  },
+  {
+    "method": "batch",
+    "n_profiles": 1000,
+    "batch_size": 16,
+    "total_time_s": 7.206585167001322,
+    "throughput_per_s": 138.7619762795508,
+    "mean_latency_ms": 7.196893478175341,
+    "p50_ms": 6.619502624971574,
+    "p99_ms": 13.21249028620969
+  },
+  {
+    "method": "batch",
+    "n_profiles": 1000,
+    "batch_size": 32,
+    "total_time_s": 6.56747195799835,
+    "throughput_per_s": 152.26559114304652,
+    "mean_latency_ms": 6.5636438769374195,
+    "p50_ms": 6.523061843779487,
+    "p99_ms": 8.136471031859855
+  },
+  {
+    "method": "batch",
+    "n_profiles": 1000,
+    "batch_size": 64,
+    "total_time_s": 7.222627333998389,
+    "throughput_per_s": 138.45377225719437,
+    "mean_latency_ms": 7.1808161037239415,
+    "p50_ms": 6.637011390637326,
+    "p99_ms": 9.524214411746357
+  },
+  {
+    "method": "batch",
+    "n_profiles": 1000,
+    "batch_size": 128,
+    "total_time_s": 6.443250290998549,
+    "throughput_per_s": 155.20117251956452,
+    "mean_latency_ms": 6.429859930441658,
+    "p50_ms": 6.425294433583417,
+    "p99_ms": 7.116848927823298
+  },
+  {
+    "method": "batch",
+    "n_profiles": 1000,
+    "batch_size": 256,
+    "total_time_s": 6.105952083002194,
+    "throughput_per_s": 163.77462292634252,
+    "mean_latency_ms": 6.108034108027983,
+    "p50_ms": 6.13458976366843,
+    "p99_ms": 6.26091044282826
+  },
+  {
+    "method": "sequential",
+    "n_profiles": 5000,
+    "batch_size": 1,
+    "total_time_s": 92.14164529100162,
+    "throughput_per_s": 54.26427956879874,
+    "mean_latency_ms": 18.36794782057914,
+    "p50_ms": 16.285416999380686,
+    "p99_ms": 57.78772675228544
+  },
+  {
+    "method": "batch",
+    "n_profiles": 5000,
+    "batch_size": 16,
+    "total_time_s": 32.72694670800047,
+    "throughput_per_s": 152.7792997193256,
+    "mean_latency_ms": 6.536952776355864,
+    "p50_ms": 6.148570312461743,
+    "p99_ms": 11.915902002501745
+  },
+  {
+    "method": "batch",
+    "n_profiles": 5000,
+    "batch_size": 32,
+    "total_time_s": 34.33245779199933,
+    "throughput_per_s": 145.6347818234317,
+    "mean_latency_ms": 6.8607092713002125,
+    "p50_ms": 6.1977513124702455,
+    "p99_ms": 13.769811766228482
+  },
+  {
+    "method": "batch",
+    "n_profiles": 5000,
+    "batch_size": 64,
+    "total_time_s": 37.982369249999465,
+    "throughput_per_s": 131.64002400929928,
+    "mean_latency_ms": 7.591539474883057,
+    "p50_ms": 7.0396438906072945,
+    "p99_ms": 12.831162645011315
+  },
+  {
+    "method": "batch",
+    "n_profiles": 5000,
+    "batch_size": 128,
+    "total_time_s": 70.31416604200058,
+    "throughput_per_s": 71.10942618608834,
+    "mean_latency_ms": 13.966054517585036,
+    "p50_ms": 15.431967609373487,
+    "p99_ms": 21.038456122960838
+  },
+  {
+    "method": "batch",
+    "n_profiles": 5000,
+    "batch_size": 256,
+    "total_time_s": 53.90456779099986,
+    "throughput_per_s": 92.75651776647436,
+    "mean_latency_ms": 10.848455564360941,
+    "p50_ms": 11.183737142580696,
+    "p99_ms": 13.737694995254422
+  }
+]

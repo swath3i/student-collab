@@ -20,18 +20,25 @@ export default function Onboarding() {
   const [fetching, setFetching] = useState(true);
   const [error, setError] = useState('');
 
-  // Fetch latest user data on mount
+  // Fetch latest user data + restore draft on mount
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const { data } = await api.get('/v1/user/');
-        setFormData(prev => ({
-          ...prev,
-          name: data.name || '',
-        }));
-        if (data.profile_pic) {
-          setPreviewUrl(data.profile_pic);
-        }
+        const draft = JSON.parse(localStorage.getItem('onboarding_draft') || '{}');
+
+        const name = data.name || '';
+        const skills = draft.skills_text || '';
+        const intent = draft.intent_text || '';
+
+        setFormData({ name, skills_text: skills, intent_text: intent });
+        if (data.profile_pic) setPreviewUrl(data.profile_pic);
+
+        // Resume to the furthest completed step
+        if (name && skills && intent) setStep(4);
+        else if (name && skills) setStep(3);
+        else if (name) setStep(2);
+        else setStep(1);
       } catch (err) {
         console.error('Failed to fetch user:', err);
       } finally {
@@ -40,6 +47,17 @@ export default function Onboarding() {
     };
     fetchUser();
   }, []);
+
+  // Persist skills/intent draft to localStorage as user types
+  useEffect(() => {
+    if (fetching) return;
+    const draft = JSON.parse(localStorage.getItem('onboarding_draft') || '{}');
+    localStorage.setItem('onboarding_draft', JSON.stringify({
+      ...draft,
+      skills_text: formData.skills_text,
+      intent_text: formData.intent_text,
+    }));
+  }, [formData.skills_text, formData.intent_text]);
 
   const handleChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -116,6 +134,7 @@ export default function Onboarding() {
       const updatedUser = { ...user, name: formData.name };
       localStorage.setItem('user', JSON.stringify(updatedUser));
       localStorage.setItem('has_profile', 'true');
+      localStorage.removeItem('onboarding_draft');
 
       navigate('/dashboard');
     } catch (err) {

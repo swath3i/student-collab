@@ -7,6 +7,8 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
+from core.routes.recommendation_api import router as recommendation_router
+from core.routes.connection_api import router as connection_router 
 
 api = NinjaAPI(
     version="1.0",
@@ -45,6 +47,8 @@ router = Router()
 api.add_router("v1/", router, auth=[AuthBearer()])
 router.add_router("profile", profile_router, tags=["profile"])
 router.add_router("user", user_router, tags=["user"])
+router.add_router("recommendations", recommendation_router, tags=["recommendations"])
+router.add_router("connection", connection_router, tags=["connection"])
 
 
 urlpatterns = [

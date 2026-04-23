@@ -35,6 +35,9 @@ def login(request, payload: LoginSchema):
                 "name": name,
             },
         )
+        if not created and not user.name and name:
+            user.name = name
+            user.save(update_fields=['name'])
 
         has_profile = Profile.objects.filter(user=user).exists()
 

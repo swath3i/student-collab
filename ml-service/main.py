@@ -46,6 +46,19 @@ def compute_similarity(request: SimilarityRequest):
     return SimilarityResponse(score=score)
 
 
+class BatchEmbedRequest(BaseModel):
+    texts: list[str]
+
+class BatchEmbedResponse(BaseModel):
+    embeddings: list[list[float]]
+
+@app.post("/batch_embed", response_model=BatchEmbedResponse)
+def batch_embed(request: BatchEmbedRequest):
+    """Generate embeddings for a batch of texts in one model forward pass."""
+    embeddings = model.encode(request.texts, batch_size=64, show_progress_bar=False).tolist()
+    return BatchEmbedResponse(embeddings=embeddings)
+
+
 @app.get("/health")
 def health():
     return {"status": "ok", "model_loaded": model is not None}
