@@ -10,7 +10,11 @@
       "Bash(env/bin/python bench_milvus.py --scale all)",
       "Bash(env/bin/python bench_caching.py --scale 10k)",
       "Bash(env/bin/python -c ' *)",
-      "Bash(env/bin/python run_all.py --skip-data-gen --charts-only)"
+      "Bash(env/bin/python run_all.py --skip-data-gen --charts-only)",
+      "Bash(/usr/libexec/java_home)",
+      "Bash(JAVA_HOME=$\\(/usr/libexec/java_home\\) env/bin/python bench_spark_pipeline.py --scale 1k)",
+      "Bash(grep -v \"^$\\\\|WARN\\\\|INFO\")",
+      "Bash(grep -v \"^$\\\\|Picked up\\\\|WARN\\\\|INFO\")"
     ]
   }
 }
