@@ -294,6 +294,9 @@ def main():
     # ── Step 3: Batch pipeline benchmark ─────────────────────────────────────
     run_script("bench_batch_pipeline.py", ["--quick"] if args.scale == "1k" else [])
 
+    # ── Step 3b: Spark pipeline benchmark ────────────────────────────────────
+    run_script("bench_spark_pipeline.py", ["--scale", "1k" if args.scale == "1k" else "10k"])
+
     # ── Step 4: Caching benchmark ─────────────────────────────────────────────
     if not args.skip_caching:
         caching_scale = "1k" if args.scale == "1k" else "10k"
